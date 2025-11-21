@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Eco-Friendly Products(Product Advertisement)</title>
+    <style>
+        /* General Styles */
+        body {
+	    background-image: url('BG2.jpg');
+            font-family: Copperplate, Brush script;
+            margin: 0;
+            padding: 0;
+            background-size: cover;
+            color: #000000;
+            line-height: 1.6;
+            position: relative;
+        }
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.8);
+            z-index: -1; 
+        }
+
+        .btn {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+
+        .btn:hover {
+            background-color: #218838;
+        }
+
+        #cart-count {
+            background: red;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 50%;
+            font-size: 14px;
+            margin-left: 6px;
+        }
+        a { 
+            text-decoration: none; 
+            color: inherit; 
+            transition: color 0.3s; 
+        }
+        a:hover { 
+            color: #FF0000; 
+        }
+	 h2 {
+	    color: #FFFFFF;
+	    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+	}
+        h1, h3 { 
+            color: #000000; 
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1); 
+        }
+        .container {
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 15px; 
+            position: relative; 
+            z-index: 1; 
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+        nav h1 { margin: 0; font-size: 1.8em; }
+        nav ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+        nav ul li { margin-left: 20px; }
+        nav ul li a {
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background 0.3s, transform 0.3s;
+        }
+        nav ul li a:hover { background: #f8f9fa; transform: scale(1.05); }
+
+        /* Sections */
+        section {
+            padding: 60px 0;
+            min-height: 100vh;
+            position: relative;
+        }
+        #home {
+            background: rgba(255, 255, 255, 0.9);
+            text-align: left;
+            background-image: url('BG2.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        #home::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.5);
+            z-index: -1;
+        }
+        #products {
+            background: rgba(248, 249, 250, 0.9);
+            background-image: url('BG2.JPG');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        #products::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(248, 249, 250, 0.8);
+            z-index: -1;
+        }
+        #contacts {
+            background: rgba(255, 255, 255, 0.9);
+            background-image: url('BG2.jpg');
+            background-size: cover;
+            background-position: left;
+            background-attachment: fixed;
+       }
+        #contacts::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.7);
+            z-index: -1;
+        }
+	    /* Buttons */
+    .add-btn {
+        background-color: #000000;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    .add-btn:hover {
+        background-color: #FF0000;
+    }
+
+    .add-btn.in-cart {
+        background-color: gray;
+        cursor: not-allowed;
+    }
+        /* Home Section */
+        #home .intro { 
+            max-width: 800px; 
+            margin: 0 auto; 
+            font-size: 1.2em; 
+            animation: fadeIn 2s ease-in; 
+        }
+
+        /* Products Section */
+        .brand-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .brand-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: slideUp 1s ease-out;
+        }
+        .brand-card:hover { 
+            transform: translateY(-10px); 
+            box-shadow: 0 12px 30px rgba(0,0,0,0.2); 
+        }
+        .brand-image { 
+            width: 100%; 
+            height: 200px; 
+            object-fit: cover; 
+            transition: transform 0.3s; 
+            cursor: pointer;
+        }
+        .brand-image:hover { transform: scale(1.05); }
+        .brand-content { padding: 20px; }
+        .brand-name { font-size: 1.5em; margin-bottom: 10px; }
+        .brand-desc { margin-bottom: 15px; }
+        .product { font-weight: bold; color: #495057; }
+        .price { color: #28a745; font-size: 1.2em; }
+
+        /* Contacts Section */
+        #contacts form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(248, 249, 250, 0.95);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            animation: fadeIn 2s ease-in;
+        }
+        form label { display: block; margin-bottom: 5px; font-weight: bold; }
+        form input, form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+        form input:focus, form textarea:focus { border-color: #000000; outline: none; }
+        form button {
+            background: linear-gradient(45deg, #000000, #000000);
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background 0.3s, transform 0.3s;
+        }
+        form button:hover { 
+            background: linear-gradient(45deg, #FF0000, #000000); 
+            transform: scale(1.05); 
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(51, 51, 51, 0.9);
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav .container { flex-direction: column; }
+            nav ul { margin-top: 10px; }
+            .brand-grid { grid-template-columns: 1fr; }
+        }
+
+      /* --- FULL PHOTO MODAL --- */
+        #imgModal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 999999;
+            background: rgba;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #imgModalContent {
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        .image-modal-close {
+            position: fixed;
+            top: 20px;
+            right: 30px;
+            font-size: 45px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1000000;
+        }
+
+    .close-cart {
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        font-size: 22px;
+        cursor: pointer;
+        color: #006699;
+    }  
+
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <h1>Eco-Friendly Products(Product Advertisement)</h1>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#contacts">Contacts</a></li>
+            </ul>
+        </div>
+    </nav>
+	    <section id="home">
+    <section id="products">
+        <div class="container">
+		<h2>Shopping Cart 🛒 <span id="cart-count">0</span></h2>
+            <div class="brand-grid">
+                <!-- Repeat Products for all 10-->
+                <div class="brand-card">
+                    <img src="Cutlery.jpeg" alt="Cutlery" class="brand-image">
+                    <div class="brand-content">
+                        <h3 class="brand-name">1.Cutlery</h3>
+                        <p class="brand-desc"> A reusable cutlery set (fork/spoon/knife or chopsticks) helps you avoid single use plastics utensils when you eat or bring your own meals. </p>
+                        <p class="product">fork/spoon/knife or chopsticks</p>
+                        <p class="price">150 php</p>
+	 <button class="btn" onclick="addToCart()">Add to Cart</button>
+
+<script>
+function toggleMenu() {
+    document.getElementById('menu').classList.toggle('open');
+} <button class="btn" onclick="addToCart()">Add to Cart</button>
+</div>
+</script>
+                    </div>
+                </div>
+                <div class="brand-card">
+                    <img src="The Humble Co. Bamboo Toothbrush Family Pack.jpeg" alt="Dior" class="brand-image">
+                    <div class="brand-content">
+                        <h3 class="brand-name">2. Bamboo Toothbrush Family Pack</h3>
+                        <p class="brand-desc">The Huble Co. Bamboo Toothbrush Family Pack: Bamboo toothbrushes are made from fast-growing biodegradable resource instead of plastic. Eco tip: after use, you can compost or at least recycle the handle.</p>
+                        <p class="product">fast-growing biodegradable</p>
+                        <p class="price">250 php</p>
+	<button class="btn" onclick="addToCart()">Add to Cart</button>
+
+<script>
+function toggleMenu() {
+    document.getElementById('menu').classList.toggle('open');
+}
+</script>
+                    </div>
+                </div>
+                <div class="brand-card">
+                    <img src="Jute Reusable Bag.jpeg" alt="Jute Reusable Bag"class="brand-image">
+                    <div class="brand-content">
+                        <h3 class="brand-name">3. Jute Reusable Bag</h3>
+                        <p class="brand-desc">Jute Reusable Bag: A jute bag is a strong reusable shopping bag great for groceries replacing plastic shopping bags.</p>
+                        <p class="product"A jute bag is a strong reusable shopping bag</p>
+                        <p class="price">150 php</p>
+	<button class="btn" onclick="addToCart()">Add to Cart</button>
+
+
+<script>
+function toggleMenu() {
+    document.getElementById('menu').classList.toggle('open');
+}
+</script>
+                    </div>
+                </div>
+                <div class="brand-card">
+                    <img src="Jute Vegetable Storage Bag.jpeg" alt="Jute Vegetable Storage Bag"class="brand-image">
+                    <div class="brand-content">
+                        <h3 class="brand-name">4. Jute Vegetable Storage Bag</h3>
+                        <p class="brand-desc">ute Vegetable Storage Bag : A smaller jute bag for produce/vegetables. Helps reduce using plastic produce bags at the supermarket.</p>
+                        <p class="product">A smaller jute bag for produce/vegetables (50ml)</p>
+                        <p class="price">150 php</p>
+	<button class="btn" onclick="addToCart()">Add to Cart</button>
+
+<script>
+function toggleMenu() {
+    document.getElementById('menu').classList.toggle('open');
+}
+</script>
+                    </div>
+                </div>
+                <div class="brand-card">
+                    <img src="Large Size Eco-Friendly Bag.jpeg" alt="Maybelline" class="brand-image">
+                    <div class="brand-content">
+                        <h3 class="brand-name">5. Large Size Eco-Friendly Bag</h3>
+                        <p class="brand-desc">Large Size Eco Friendly Bag: A more budget reusable bag option if you need something large for bulk shopping or items.</p>
+                        <p class="product"> A more budget reusable bag</p>
+                        <p class="price">250 php</p>
+	<button class="btn" onclick="addToCart()">Add to Cart</button>
+
+
+<script>
+function toggleMenu() {
+    document.getElementById('menu').classList.toggle('open');
+}
+</script>
+                    </div>
+                </div>
+                <div class="brand-card">
+                    <img src="Reusable Beeswax Food Wrap.jpeg" alt="Nars" class="brand-image">
+                    <div class="brand-content">
+                        <h3 class="brand-name">6. Reusable Beeswax Food Wrap</h3>
+                        <p class="brand-desc">Reusable Beeswax Food Wrap: An alternative to plastic wrap for covering or wrapping food items washable and reusable.</p>
+                        <p class="product">An alternative to plastic wrap</p>
+                        <p class="price">200 php</p>
+	<button class="btn" onclick="addToCart()">Add to Cart</button>
+
+
+<script>
+function toggleMenu() {
+    document.getElementById('menu').classList.toggle('open');
+}
+</script>
+                    </div>
+                </div>
+                <div class="brand-card">
+                    <img src="Sillicone Food Storage Bag.jpeg" alt="Fenty" class="brand-image">
+                    <div class="brand-content">
+                        <h3 class="brand-name">7. Sillicone Food Storage Bag</h3>
+                        <p class="brand-desc">Silicon Food Storage Bag: Silicon bags help reduce single use plastic bag waste in food storage.</p>
+                        <p class="product">Silicon bags help reduce single use plastic bag</p>
+                        <p class="price">300 php</p>
+	<button class="btn" onclick="addToCart()">Add to Cart</button>
+
+
+<script>
+function toggleMenu() {
+    document.getElementById('menu').classList.toggle('open');
+}
+</script>
+                    </div>
+                </div>
+                <div class="brand-card">
+                    <img src="Simple Green Concentrated All-Purpose cleaner.jpeg" alt="Simple Green Concentrated All-Purpose Cleaner" class="brand-image">
+                    <div class="brand-content">
+                        <h3 class="brand-name">8. Simple Green Concentrated All-Purpose Cleaner</h3>
+                        <p class="brand-desc">Simple Green Concentrated All-Purpose Cleaner: A green cleaning product, better for the environment because safer ingredients and likely more minimal pakaging. (From one source: green cleaning avoids toxic chemicals and protects environment & health).</p>
+                        <p class="product">A green cleaning product</p>
+                        <p class="price">500 php</p>
+	<button class="btn" onclick="addToCart()">Add to Cart</button>
+
+<script>
+function toggleMenu() {
+    document.getElementById('menu').classList.toggle('open');
+}
+</script>
+                    </div>
+                </div>
+                <div class="brand-card">
+                    <img src="Stainless One Touch Bottle.jpeg" alt="Stainless One Touch Bottle" class="brand-image">
+                    <div class="brand-content">
+                        <h3 class="brand-name">9. Stainless One Touch Bottle</h3>
+                        <p class="brand-desc">A durable stainless steel water bottle, ideal to replace disposable plastic bottles less waste, plus likely beter insulation.</p>
+                        <p class="product">stainless steel water bottle</p>
+                        <p class="price">300 php</p>
+	<button class="btn" onclick="addToCart()">Add to Cart</button>
+
+
+<script>
+function toggleMenu() {
+    document.getElementById('menu').classList.toggle('open');
+}
+</script>
+                    </div>
+                </div>
+                <div class="brand-card">
+                    <img src="THE UNSCENTEDS Organic Deodrant.jpeg" alt="THE UNSCENTEDS Organic Deodorant" class="brand-image">
+                    <div class="brand-content">
+                        <h3 class="brand-name">10. THE UNSCENTEDS Organic Deodorant</h3>
+                        <p class="brand-desc">THE UNSCENTEDS Organic Deodorant: Personal-care product made with more natural/organic ingredients fewer harmful chemicals.</p>
+                        <p class="product"> Organic Deodorant</p>
+                        <p class="price">350 php</p>
+	<button class="btn" onclick="addToCart()">Add to Cart</button>
+
+
+<script>
+function toggleMenu() {
+    document.getElementById('menu').classList.toggle('open');
+}
+</script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contacts">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <form action="#" method="post">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                
+                <label for="email">Address:</label>
+                <input type="email" id="email" name="email" required>
+                
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+                
+                <button type="submit">Enter</button>
+            </form>
+        </div>
+    </section>
+
+
+    <!-- IMAGE MODAL -->
+    <div id="imgModal">
+        <span class="image-modal-close">&times;</span>
+        <img id="imgModalContent">
+    </div>
+
+    <script>
+        // Select all product images
+        const productImages = document.querySelectorAll(".brand-image");
+        const modal = document.getElementById("imgModal");
+        const modalImg = document.getElementById("imgModalContent");
+        const modalClose = document.querySelector(".image-modal-close");
+
+        // Open modal when clicking an image
+        productImages.forEach(image => {
+            image.addEventListener("click", () => {
+                modal.style.display = "flex";
+                modalImg.src = image.src;
+            });
+        });
+
+        // Close modal on clicking X
+        modalClose.addEventListener("click", () => {
+            modal.style.display = "none";
+        });
+
+        // Close modal when clicking outside the image
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) modal.style.display = "none";
+        });
+	    let cartCount = 0;
+
+    function addToCart() {
+        cartCount++;
+        document.getElementById("cart-count").innerText = cartCount;
+        alert('✅ Item Added To Cart!');
+    }
+    </script>
+</body>
+</html>
